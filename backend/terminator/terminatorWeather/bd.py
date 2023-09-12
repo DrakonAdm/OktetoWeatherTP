@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from .models import *
 
-file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), './static/pastWeather.txt')
+file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), './static/pastweather.txt')
 with open(file_path, 'r', encoding='utf-8') as file:
     for line in file:
         # Разбиваем строку на отдельные значения

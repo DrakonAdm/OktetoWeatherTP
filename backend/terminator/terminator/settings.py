@@ -11,9 +11,9 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-
-load_dotenv()
+# from dotenv import load_dotenv
+#
+# load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-o6(&jqdb#emy$x@90b4ht7*@rgl7g*zv&x&c@79wr6+nc)^-%2
 # DEBUG = os.getenv('DEBUG')
 DEBUG = False
 
-ALLOWED_HOSTS = ['backend-drakonadm.cloud.okteto.net', 'frontend-drakonadm.cloud.okteto.net']
+ALLOWED_HOSTS = ['backend-drakonadm.cloud.okteto.net', 'frontend-drakonadm.cloud.okteto.net', '*']
 
 # Application definition
 
