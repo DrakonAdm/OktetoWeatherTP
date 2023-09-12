@@ -70,8 +70,8 @@ SESSION_COOKIE_HTTPONLY = True
 
 CSRF_COOKIE_SECURE = True
 SESSION_COOKIE_SECURE = True
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://frontend:3000', 'http://frontend:3000', "https://frontend-drakonadm.cloud.okteto.net"]
-SESSION_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://frontend:3000', 'http://frontend:3000', "https://frontend-drakonadm.cloud.okteto.net"]
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://frontend:3000', 'http://frontend:3000', "https://frontend-drakonadm.cloud.okteto.net", "https://backend-drakonadm.cloud.okteto.net"]
+SESSION_TRUSTED_ORIGINS = ['http://localhost:3000', 'http://127.0.0.1:3000', 'https://frontend:3000', 'http://frontend:3000', "https://frontend-drakonadm.cloud.okteto.net", "https://backend-drakonadm.cloud.okteto.net"]
 
 CORS_ALLOW_ALL_ORIGINS = False
 CORS_ALLOW_CREDENTIALS = True
@@ -212,6 +212,8 @@ REST_FRAMEWORK = {
     ],
 }
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 SCHEDULER_AUTOSTART = False
 
 SCHEDULER_CONFIG = {
@@ -228,5 +230,7 @@ SWAGGER_SETTINGS = {
     'SUPPORTED_SUBMIT_METHODS': [
         'get',
         'post',
-    ]
+    ],
+    'USE_SESSION_AUTH': False
 }
+

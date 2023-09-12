@@ -13,7 +13,7 @@ django-apscheduler==0.6.2
 django-filter==23.2
 django-rest-swagger==2.2.0
 djangorestframework==3.14.0
-drf-yasg==1.21.7
+drf-yasg==1.21.5
 fonttools==4.39.4
 idna==3.4
 inflection==0.5.1
