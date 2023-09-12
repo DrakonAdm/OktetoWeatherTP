@@ -27,7 +27,7 @@ def start():
     # scheduler.add_jobstore(DjangoMemoryJobStore(), "default")
     # run this job every 24 hours
     # scheduler.add_job(activate_scripts, 'interval', hours=24, name='refreshWeather', jobstore='default')
-    scheduler.add_job(activate_scripts, 'cron', hour=2, minute=30, name='refreshWeather', jobstore='default')
+    scheduler.add_job(activate_scripts, 'cron', hour=3, minute=30, name='refreshWeather', jobstore='default')
     # next_run_time=datetime.now()
     register_events(scheduler)
     scheduler.start()
