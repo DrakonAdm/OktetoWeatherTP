@@ -1,0 +1,63 @@
+version: '3'
+
+networks:
+  my_network:
+    driver: bridge
+
+services:
+  db:
+    container_name: db
+    networks:
+      - my_network
+    image: postgres:latest
+    restart: always
+#    env_file:
+#      - .env
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: anton909808
+      POSTGRES_DB: ter
+    ports:
+      - "5432"
+    volumes:
+      - datavolume:/data/postgres
+  backend:
+    container_name: backend
+    networks:
+      - my_network
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    restart: always
+    command: sh -c "python ./terminator/manage.py makemigrations && python ./terminator/manage.py migrate && python ./terminator/manage.py shell < start.py && python ./terminator/manage.py runserver 0.0.0.0:8000"
+    # && python ./terminator/manage.py shell < start.py
+    # && python ./terminator/manage.py shell 'from terminatorWeather.models import Location; loc = Location(); loc.collectModelLocation();' && python ./terminator/manage.py shell 'from terminatorWeather.models import Past; past = Past(); Past().read_past_weather_file();' && python ./terminator/manage.py shell 'from terminatorWeather.models import Abnormal; abnormal = Abnormal(); Abnormal().find_abnormal_weather();' && python ./terminator/manage.py shell 'from terminatorWeather.scripts import createMonth; createMonth();' && python ./terminator/manage.py shell 'from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(\"Antoni.Drakon@mail.ru\", \"KiKBooto\");'
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST:db
+      - DB_NAME:ter
+      - DB_USER:postgres
+      - DB_PASSWORD:anton909808
+#    env_file:
+#      - .env
+
+  frontend:
+    container_name: frontend
+    networks:
+      - my_network
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    restart: always
+    command: npm start
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+
+volumes:
+  datavolume:
+          
