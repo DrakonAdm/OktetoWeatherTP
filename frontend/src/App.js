@@ -13,12 +13,12 @@ const App = observer(() => {
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-      check().then( data => {
-          user.setUser(true)
-          user.setIsAuth(true)
-      }).finally(() => setLoading(false))
-  }, [])
+//  useEffect(() => {
+//      check().then( data => {
+//          user.setUser(true)
+//          user.setIsAuth(true)
+//      }).finally(() => setLoading(false))
+//  }, [])
 
   return (
     <Context.Provider value = {{
