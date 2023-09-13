@@ -156,8 +156,8 @@ def updateForecastThirtySecondDay(integerDay=4):
     for location in locations:
         forecast = Forecast.objects.create(date=today, city=location)
         forecastWeatherForSix(forecast)
-        if check(forecast, location):
-            forecast.save()
+        # if check(forecast, location):
+        forecast.save()
 
 
 def forecastWeatherForSix(forecast):
