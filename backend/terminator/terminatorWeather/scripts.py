@@ -13,6 +13,15 @@ def check_and_move_forecast():
     forecasts = Forecast.objects.filter(date__lt=today)
 
     for forecast in forecasts:
+        if (forecast.date is None or
+                forecast.minTem is None or
+                forecast.maxTem is None or
+                forecast.averageTem is None or
+                forecast.atmosphericPressure is None or
+                forecast.windSpeed is None or
+                forecast.precipitation is None):
+            forecast.delete()
+            continue
         past = Past.objects.create(
             date=forecast.date,
             minTem=forecast.minTem,
@@ -126,6 +135,19 @@ def createMonth():
         updateForecastThirtySecondDay(i)
 
 
+def check(forecastCheck, loc):
+    # Проверяем, нет ли других записей с той же датой и городом
+    forec = Forecast.objects.all()
+    duplicates = forec.objects.filter(
+        date=forecastCheck.date,
+        city=loc
+    )
+    if duplicates.exists():
+        return False
+    else:
+        return True
+
+
 def updateForecastThirtySecondDay(integerDay=4):
     today = timezone.now().date() + timedelta(days=integerDay)
     locations = Location.objects.all()
@@ -134,7 +156,8 @@ def updateForecastThirtySecondDay(integerDay=4):
     for location in locations:
         forecast = Forecast.objects.create(date=today, city=location)
         forecastWeatherForSix(forecast)
-        forecast.save()
+        if check(forecast, location):
+            forecast.save()
 
 
 def forecastWeatherForSix(forecast):
