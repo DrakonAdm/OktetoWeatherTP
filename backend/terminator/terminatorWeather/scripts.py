@@ -104,7 +104,7 @@ def updateForecastWeather(forecast):
 
             forecast.minTem = data['main']['temp_min']
             forecast.maxTem = data['main']['temp_max']
-            forecast.averageTem = data['main']['temp']
+            forecast.averageTem = round((data['main']['temp_min'] + data['main']['temp_max']) / 2, 2)
             forecast.atmosphericPressure = data['main']['pressure']
             forecast.windSpeed = data['wind']['speed']
 
