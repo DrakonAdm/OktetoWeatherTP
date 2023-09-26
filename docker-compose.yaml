@@ -30,7 +30,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     restart: always
-    command: python ./terminator/manage.py runserver 0.0.0.0:8000
+    command: python ./terminator/manage.py runserver 0.0.0.0:8000 --noreload
     # python ./terminator/manage.py makemigrations && python ./terminator/manage.py migrate &&
     # && python ./terminator/manage.py shell < start.py
     # && python ./terminator/manage.py shell 'from terminatorWeather.models import Location; loc = Location(); loc.collectModelLocation();' && python ./terminator/manage.py shell 'from terminatorWeather.models import Past; past = Past(); Past().read_past_weather_file();' && python ./terminator/manage.py shell 'from terminatorWeather.models import Abnormal; abnormal = Abnormal(); Abnormal().find_abnormal_weather();' && python ./terminator/manage.py shell 'from terminatorWeather.scripts import createMonth; createMonth();' && python ./terminator/manage.py shell 'from django.contrib.auth import get_user_model; User = get_user_model(); User.objects.create_superuser(\"Antoni.Drakon@mail.ru\", \"KiKBooto\");'
